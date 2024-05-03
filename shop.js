@@ -60,47 +60,49 @@ Promise.all(fetchPromises)
     .catch(error => console.error('Error fetching products:', error));
 
 
-function displayProducts(products) {
-
-    const productContainer = document.getElementById('product1');
-    productContainer.innerHTML = '';
-
-    const proContainer = document.createElement('div');
-    proContainer.classList.add('pro-container');
-
-    productContainer.appendChild(proContainer);
-
-    products.forEach(product => {
-
-        const productDiv = document.createElement('div');
-        productDiv.classList.add('pro');
-        const productImg = document.createElement('img');
-        productImg.src = product.thumbnail;
-        productImg.alt = product.title;
-        const productDes = document.createElement('div');
-        productDes.classList.add('des');
-        const productBrand = document.createElement('span');
-        productBrand.textContent = product.brand;
-        const productTitle = document.createElement('h5');
-        productTitle.textContent = product.title;
-        const productPrice = document.createElement('h4');
-        productPrice.textContent = `$${product.price}`;
-        const productCartLink = document.createElement('a');
-        productCartLink.href = '#';
-        const productCartIcon = document.createElement('i');
-        productCartIcon.classList.add('fa-solid', 'fa-cart-plus', 'cart');
-
-        productDes.appendChild(productBrand);
-        productDes.appendChild(productTitle);
-        productDes.appendChild(productPrice);
-        productCartLink.appendChild(productCartIcon);
-        productDiv.appendChild(productImg);
-        productDiv.appendChild(productDes);
-        productDiv.appendChild(productCartLink);
-        proContainer.appendChild(productDiv);
-    });
-}
-
+    function displayProducts(products) {
+        const productContainer = document.getElementById('product1');
+        productContainer.innerHTML = '';
+    
+        const proContainer = document.createElement('div');
+        proContainer.classList.add('pro-container');
+    
+        productContainer.appendChild(proContainer);
+    
+        products.forEach(product => {
+            const productDiv = document.createElement('div');
+            productDiv.classList.add('pro');
+            
+            // Create a link around the product thumbnail or title
+            const productLink = document.createElement('a');
+            productLink.href = `sproduct.html?id=${product.id}`; // Link to single product page with product ID as query parameter
+            
+            // Product thumbnail
+            const productImg = document.createElement('img');
+            productImg.src = product.thumbnail;
+            productImg.alt = product.title;
+            
+            // Product details
+            const productDes = document.createElement('div');
+            productDes.classList.add('des');
+            const productBrand = document.createElement('span');
+            productBrand.textContent = product.brand;
+            const productTitle = document.createElement('h5');
+            productTitle.textContent = product.title;
+            const productPrice = document.createElement('h4');
+            productPrice.textContent = `$${product.price}`;
+    
+            // Append elements
+            productDes.appendChild(productBrand);
+            productDes.appendChild(productTitle);
+            productDes.appendChild(productPrice);
+            productLink.appendChild(productImg); // Add image to the link
+            productLink.appendChild(productDes); // Add details to the link
+            productDiv.appendChild(productLink); // Add link to the product container
+            proContainer.appendChild(productDiv);
+        });
+    }
+    
 // Sorting
 
 function sortByPriceLowToHigh() {

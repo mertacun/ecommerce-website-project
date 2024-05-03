@@ -117,6 +117,35 @@ button.white {
     left: 30%;
     transform: translate(-50%, -50%);
   }
+  .searchDropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+    background-color: #fff;
+    border: 1px solid #F0C32D;
+    border-top: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.searchDropdown p {
+    padding: 0 8px;
+}
+
+.searchResult {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #F0C32D;
+}
+
+.searchResult:hover {
+    background-color: #F3F0FA;
+}
+.productThumbnail {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
 
 #header {
  display: flex;
@@ -692,6 +721,13 @@ footer .copyright {
 #prodetails .single-pro-image  {
     width: 40%;
     margin-right: 50px;
+    height: 450px; /* Adjust this value as needed */
+}
+
+#MainImg {
+    width: 100%;
+    height: 100%; /* Fill the container's height */
+    object-fit: cover; /* Maintain aspect ratio and fit within container */
 }
 
 .small-img-group {
@@ -702,6 +738,14 @@ footer .copyright {
 .small-img-col {
     flex-basis: 24%;
     cursor: pointer;
+    height: 100px; /* Adjust this value as needed */
+    overflow: hidden;
+}
+
+.small-img-col img {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
 }
 
 #prodetails .single-pro-details {
@@ -737,12 +781,16 @@ footer .copyright {
 
 
 #prodetails .single-pro-details button {
-    background-color: #088178;
+    background-color: #F0C32D;
     color: #fff;
 }
 
 #prodetails .single-pro-details span {
     line-height: 25px;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled) {
+    box-shadow: none!important;
 }
 
 /*Blog Page*/
@@ -862,6 +910,12 @@ footer .copyright {
     text-align: center;
 }
 
+#about-app .row img {
+    border: 1px solid #F0C32D;
+    border-radius: 6px;
+    margin-top: 7px;
+}
+
 #about-app .video {
     width: 70%;
     height: 100%;
@@ -934,7 +988,7 @@ footer .copyright {
     justify-content: space-between;
     margin: 30px;
     padding: 80px;
-    border: 1px solid #e1e1e1;
+    border: 1px solid #F0C32D;
 }
 
 #form-details form {
@@ -949,12 +1003,12 @@ footer .copyright {
     width: 100%;
     padding: 12px 15px;
     margin-bottom: 20px;
-    border: 1px solid #e1e1e1;
+    border: 1px solid #F0C32D;
     outline: none;
 }
 
 #form-details form button {
-    background-color: #088178;
+    background-color: #F0C32D;
     color: #fff;
 }
 
@@ -987,6 +1041,10 @@ footer .copyright {
 
 /* Cart Page */
 
+#page-header.cart-header {
+    background-image: url("img/cart-banner.jpg");
+    background-position: 90%;
+}
 
 #cart {
     overflow-x: auto;
@@ -1031,7 +1089,7 @@ footer .copyright {
 }
 
 #cart table thead {
-    border: 1px solid #e2e9e1;
+    border: 1px solid #F0C32D;
     border-left: none;
     border-right: none;
 }
@@ -1070,14 +1128,14 @@ footer .copyright {
 #coupon input {
     width: 60%;
     padding: 10px 20px;
-    border: 1px solid #e2e9e1;
+    border: 1px solid #F0C32D;
     outline: none;
     margin-right: 10px;
 }
 
 #coupon button,
 #subtotal button {
-    background-color: #088178;
+    background-color: #F0C32D;
     color: #fff;
     padding: 12px 20px;
 }
@@ -1086,7 +1144,7 @@ footer .copyright {
     width: 50%;
     margin-bottom: 30px;
     padding: 30px;
-    border: 1px solid #e2e9e1;
+    border: 1px solid #F0C32D;
 }
 
 #subtotal table {
@@ -1097,7 +1155,7 @@ footer .copyright {
 
 #subtotal table td {
     width: 50%;
-    border: 1px solid #e2e9e1;
+    border: 1px solid #F0C32D;
     font-size: 13px;
     padding: 10px;
 }
@@ -1169,6 +1227,11 @@ footer .copyright {
     #lg-bag {
         display: none;
     }
+    .wrap {
+        width: 50%;
+        left: 60%;
+    }
+
     #hero {
         height: 70vh;
         padding: 0 80px;
@@ -1223,9 +1286,13 @@ footer .copyright {
     h2 {
         font-size: 32px;
     }
+    .wrap {
+        width: 50%;
+        left: 55%;
+    }
     #hero {
         padding: 0 20px;
-        background-position: 55%;
+        background-position: 65%;
     }
     #feature {
         justify-content: space-between;
@@ -1262,6 +1329,10 @@ footer .copyright {
     footer {
         justify-content: space-evenly;
     }
+    footer.section-p1 {
+        padding: 15px 50px;
+    }
+
     footer .col {
         padding-bottom: 10px;
     }
@@ -1287,6 +1358,8 @@ footer .copyright {
     }
     #prodetails .single-pro-details {
         width: 100%;
+        padding-top: 130px;
+        z-index: -1;
     }
 
     /* Blog Page */
