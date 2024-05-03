@@ -189,7 +189,7 @@ function displayCart() {
 
       row.innerHTML = `
           <td><a href="#" class="remove-item"><i class="fa-solid fa-xmark"></i></a></td>
-          <td><img src="img/products/default.jpg" alt="product"></td>
+          <td><img src="${product.thumbnail}" alt="product"></td>
           <td>${product.name}</td>
           <td>${product.price}</td>
           <td><input type="number" value="${product.quantity}" min="1" class="quantity-input"></td>
