@@ -3,35 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cara - Home</title>
+    <title>Paula's - Home</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
     <section id="header">
         <a href="#"><img src="img/logo.png" class="logo" alt="logo"></a>
-        <div>
+        <div class="wrap">
+            <div class="search">
+               <input type="text" class="searchTerm" placeholder="What are you looking for?">
+               <button type="submit" class="searchButton">
+                 <i class="fa fa-search"></i>
+              </button>
+            </div>
+        </div>
             <ul id="navbar">
                 <li><a class="active" href="index.html">Home</a></li>
                 <li><a href="shop.html">Shop</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li id="lg-bag"><a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                <div id="icons">
+                    <li id="lg-account" class="icons"><a href="account.html"><i class="fa-solid fa-user"></i></a></li>
+                    <li id="lg-fav" class="icons"><a href="#"><i class="fa-solid fa-heart"></i></a></li>
+                    <li id="lg-bag" class="icons"><a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                </div>
                 <a href="#" id="close"><i class="fa-solid fa-xmark"></i></a>
             </ul>
         </div>
         <div id="mobile">
-            <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
             <i id="bar" class="fas fa-outdent"></i>
         </div>
     </section>
 
     <section id="hero">
-        <h4>Trade-in Offer</h4>
-        <h2>Super value deals</h2>
-        <h1>On all products</h1>
-        <p>Save more with coupons & up to 70% off!</p>
+        <h4>Dress to Impress!</h4>
+        <h2>Big Savings Await</h2>
+        <h1>Shop Now for Stylish Picks</h1>
+        <p>And Enjoy Up to 70% Off Your Favorites!</p>
         <button>Shop Now</button>
     </section>
 
@@ -199,7 +210,7 @@
     </section>
 
     <section id="banner" class="section-m1">
-        <h4>Repair Services</h4>
+        <h4>Refresh Your Style</h4>
         <h2>Up to <span>70% Off</span> - All T-Shirts & Accessories</h2>
         <button class="normal">Explore More</button>
     </section>
@@ -342,15 +353,15 @@
 
     <section id="sm-banner" class="section-p1">
         <div class="banner-box">
-            <h4>Crazy Deals</h4>
+            <h4>Unbeatable Offers</h4>
             <h2>Buy 1 Get 1 Free</h2>
-            <span>The Best Products From The Best Brands</span>
+            <span>Top-Quality Selections from Premier Brands</span>
             <button class="white">Learn More</button>
         </div>
         <div class="banner-box banner-box2">
-            <h4>Spring/Summer</h4>
-            <h2>Buy 1 Get 1 Free</h2>
-            <span>The Best Products From The Best Brands</span>
+            <h4>Outlet Specials</h4>
+            <h2>Big Savings Await at Our Outlet!</h2>
+            <span>Shop Quality Styles for Less</span>
             <button class="white">Collection</button>
         </div>
     </section>
@@ -358,15 +369,15 @@
     <section id="banner3">
         <div class="banner-box">
             <h2>Seasonal Sale</h2>
-            <h3>Winter Collection -50% Off</h3>
+            <h3>Save Big on Season's Essentials!</h3>
         </div>
         <div class="banner-box banner-box2">
-            <h2>Seasonal Sale</h2>
-            <h3>Winter Collection -50% Off</h3>
+            <h2>Special Savings Event</h2>
+            <h3>Big Savings on Wardrobe Essentials!</h3>
         </div>
         <div class="banner-box banner-box3">
-            <h2>Seasonal Sale</h2>
-            <h3>Winter Collection -50% Off</h3>
+            <h2>Weekend Warrior Deals</h2>
+            <h3>Find Your Perfect Outfit for Any Adventure!</h3>
         </div>
     </section>
 
@@ -422,7 +433,8 @@
             <img src="img/pay/pay.png" alt="payment">
         </div>
         <div class="copyright">
-            <p>&copy; 2024 Cara. All Rights Reserved</p>
+            <p>&copy; 2024 Paula's. All Rights Reserved</p>
+            <p>Made with <span style="color: #e25555;">❤</span> in Ottawa</p>
         </div>
     </footer>
     <script src="script.js"></script>
