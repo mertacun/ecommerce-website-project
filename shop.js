@@ -1,19 +1,5 @@
-const allowedCategories = [
-    "tops",
-    "womens-dresses",
-    "womens-shoes",
-    "mens-shirts",
-    "mens-shoes",
-    "mens-watches",
-    "womens-watches",
-    "womens-bags",
-    "womens-jewellery",
-    "sunglasses"
-];
-
 const pageSize = 20;
 let currentPage = 1;
-let allProducts = [];
 let sortedProducts = [];
 
 function fetchProductsForPage(pageNumber) {
@@ -42,14 +28,6 @@ function updatePaginationLinks(totalProducts) {
     }
 }
 
-const fetchPromises = allowedCategories.map(category => {
-    return fetch(`https://dummyjson.com/products/category/${category}`)
-        .then(res => res.json())
-        .then(data => {
-            const products = data.products;
-            allProducts = allProducts.concat(products);
-        });
-});
 
 Promise.all(fetchPromises)
     .then(() => {
@@ -72,36 +50,56 @@ Promise.all(fetchPromises)
         products.forEach(product => {
             const productDiv = document.createElement('div');
             productDiv.classList.add('pro');
-            
-            // Create a link around the product thumbnail or title
+    
             const productLink = document.createElement('a');
-            productLink.href = `sproduct.html?id=${product.id}`; // Link to single product page with product ID as query parameter
-            
-            // Product thumbnail
+            productLink.href = `sproduct.html?id=${product.id}`;
+    
             const productImg = document.createElement('img');
             productImg.src = product.thumbnail;
-            productImg.alt = product.title;
-            
-            // Product details
+            productImg.alt = '';
+    
             const productDes = document.createElement('div');
             productDes.classList.add('des');
+    
             const productBrand = document.createElement('span');
             productBrand.textContent = product.brand;
+    
             const productTitle = document.createElement('h5');
             productTitle.textContent = product.title;
+    
+            const starDiv = document.createElement('div');
+            starDiv.classList.add('star');
+            for (let i = 0; i < 5; i++) {
+                const starIcon = document.createElement('i');
+                starIcon.classList.add('fas', 'fa-star');
+                starDiv.appendChild(starIcon);
+            }
+    
             const productPrice = document.createElement('h4');
             productPrice.textContent = `$${product.price}`;
     
-            // Append elements
+            const cartLink = document.createElement('a');
+            cartLink.href = '#';
+            const cartIcon = document.createElement('i');
+            cartIcon.classList.add('fa-solid', 'fa-cart-plus', 'cart');
+    
             productDes.appendChild(productBrand);
             productDes.appendChild(productTitle);
+            productDes.appendChild(starDiv);
             productDes.appendChild(productPrice);
-            productLink.appendChild(productImg); // Add image to the link
-            productLink.appendChild(productDes); // Add details to the link
-            productDiv.appendChild(productLink); // Add link to the product container
+    
+            cartLink.appendChild(cartIcon);
+    
+            productLink.appendChild(productImg);
+            productLink.appendChild(productDes);
+            productLink.appendChild(cartLink);
+    
+            productDiv.appendChild(productLink);
+    
             proContainer.appendChild(productDiv);
         });
     }
+    
     
 // Sorting
 

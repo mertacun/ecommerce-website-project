@@ -1,6 +1,7 @@
 const bar = document.getElementById('bar');
 const close = document.getElementById('close');
 const nav = document.getElementById('navbar');
+let allProducts = [];
 
 if (bar) {
   bar.addEventListener('click', () => {
@@ -15,6 +16,28 @@ if (close) {
 }
 
 // Search Bar
+
+const allowedCategories = [
+  "tops",
+  "womens-dresses",
+  "womens-shoes",
+  "mens-shirts",
+  "mens-shoes",
+  "mens-watches",
+  "womens-watches",
+  "womens-bags",
+  "womens-jewellery",
+  "sunglasses"
+];
+const fetchPromises = allowedCategories.map(category => {
+  return fetch(`https://dummyjson.com/products/category/${category}`)
+      .then(res => res.json())
+      .then(data => {
+          const products = data.products;
+          allProducts = allProducts.concat(products);
+      });
+});
+
 const searchTermInput = document.querySelector('.searchTerm');
 searchTermInput.addEventListener('input', () => {
     const searchTerm = searchTermInput.value.trim().toLowerCase();
@@ -59,6 +82,10 @@ function displaySearchResults(results) {
         productTitle.textContent = result.title;
         resultItem.appendChild(productTitle);
 
+        resultItem.addEventListener('click', () => {
+          window.location.href = `sproduct.html?id=${result.id}`;
+      });
+
         dropdownContainer.appendChild(resultItem);
     });
 
@@ -75,11 +102,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+
+
 function addToCart() {
   const productName = document.querySelector('.single-pro-details h4').textContent;
   const productPrice = parseFloat(document.querySelector('.single-pro-details h2').textContent.replace('$', ''));
   const selectedSize = document.querySelector('select').value;
   const selectedQuantity = parseInt(document.querySelector('input[type="number"]').value);
+  const productThumbnail = document.querySelector('#prodetails > div.single-pro-image > div > div:nth-child(1) > img').src;
 
   if (selectedSize === 'Select Size') {
       Swal.fire({
@@ -96,7 +126,8 @@ function addToCart() {
   const product = {
       name: `${productName} (${selectedSize})`,
       price: productPrice,
-      quantity: selectedQuantity
+      quantity: selectedQuantity,
+      thumbnail: productThumbnail
   };
 
   let cart = localStorage.getItem('cart');
@@ -159,6 +190,7 @@ function removeItem(event) {
       cart = cart.filter(item => item.name !== productName);
       localStorage.setItem('cart', JSON.stringify(cart));
       displayCart();
+      updateCartBadge();
   }
 }
 
@@ -173,7 +205,7 @@ function displayCart() {
   let cart = localStorage.getItem('cart');
   if (!cart) {
       cartTableBody.innerHTML = '<tr><td colspan="6">Your cart is empty</td></tr>';
-      subtotalElement.querySelector('td:nth-child(2)').textContent = '$0.00'; 
+      subtotalElement.querySelector('td:nth-child(2)').textContent = '$0.00';
       subtotalElement.querySelector('strong').textContent = '$0.00';
       return;
   }
@@ -207,9 +239,39 @@ function displayCart() {
           }
           localStorage.setItem('cart', JSON.stringify(cart));
           displayCart();
+          updateCartBadge();
       });
   });
 
   subtotalElement.querySelector('td:nth-child(2)').textContent = `$${cartSubtotal.toFixed(2)}`;
   subtotalElement.querySelector('table tr:last-child td:last-child').innerHTML = `<strong>$${cartSubtotal.toFixed(2)}</strong>`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateCartBadge();
+});
+
+function updateCartBadge() {
+  let cart = localStorage.getItem('cart');
+  if (!cart) {
+      document.getElementById('cart-badge').textContent = '0';
+      return;
+  }
+
+  cart = JSON.parse(cart);
+  let totalCount = 0;
+
+  cart.forEach(product => {
+      totalCount += product.quantity;
+  });
+
+  const cartBadge = document.getElementById('cart-badge');
+  const currentCount = parseInt(cartBadge.textContent);
+
+  cartBadge.textContent = totalCount.toString();
+  cartBadge.style.opacity = '0';
+  cartBadge.style.transition = 'opacity 0.8s';
+  setTimeout(() => {
+      cartBadge.style.opacity = '1';
+  }, 350);
 }
