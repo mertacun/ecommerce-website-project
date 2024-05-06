@@ -1389,7 +1389,6 @@ div:where(.swal2-container) button:where(.swal2-styled) {
     #prodetails .single-pro-details {
         width: 100%;
         padding-top: 130px;
-        z-index: -1;
     }
 
     /* Blog Page */
