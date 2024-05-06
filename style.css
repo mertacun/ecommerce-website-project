@@ -12,6 +12,7 @@
 
 body {
     width: 100%;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -1379,8 +1380,7 @@ div:where(.swal2-container) button:where(.swal2-styled) {
     /* Product Page */
 
     #prodetails {
-        display: flex;
-        flex-direction: column;
+        display: ruby-text;
     }
     #prodetails .single-pro-image {
         width: 100%;
@@ -1388,7 +1388,6 @@ div:where(.swal2-container) button:where(.swal2-styled) {
     }
     #prodetails .single-pro-details {
         width: 100%;
-        padding-top: 130px;
     }
 
     /* Blog Page */
