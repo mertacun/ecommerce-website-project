@@ -224,7 +224,6 @@ button.white {
     display: flex;
 }
 
-
 #lg-bag .badge {
     position: absolute;
     top: -7px;
@@ -1077,6 +1076,7 @@ div:where(.swal2-container) button:where(.swal2-styled) {
 
 #cart table img {
     width: 70px;
+    height: 70px;
 }
 
 #cart table td:nth-child(1) {
@@ -1218,6 +1218,7 @@ div:where(.swal2-container) button:where(.swal2-styled) {
         box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1);
         padding: 80px 0 0 10px;
         transition: 0.3s;
+        z-index: 1;
     }
     #navbar.active {
         right: 0px;
@@ -1229,20 +1230,27 @@ div:where(.swal2-container) button:where(.swal2-styled) {
         display: flex;
         align-items: center;
     }
-    #mobile a span {
-    position: absolute;
-    top: -7px;
-    right: -7px;
-    background-color: #F0C32D;
-    color: white;
-    font-size: 12px;
-    padding: 2px 5px;
-    border-radius: 50%;
-}
+    .mobile-badge {
+        position: absolute;
+        top: -7px;
+        right: -7px;
+        background-color: #F0C32D;
+        color: white;
+        font-size: 12px;
+        padding: 2px 5px;
+        border-radius: 50%;
+    }
+    #mobile a {
+        position: relative;
+    }
     #mobile i {
         color: #1a1a1a;
         font-size: 24px;
         padding-left: 20px;
+    }
+
+    #mobile i.active {
+        color: #F0C32D;
     }
     #close {
         display: initial;
@@ -1380,16 +1388,21 @@ div:where(.swal2-container) button:where(.swal2-styled) {
     /* Product Page */
 
     #prodetails {
-        display: ruby-text;
+        display: flex;
+        flex-direction: column;
     }
     #prodetails .single-pro-image {
         width: 100%;
-        margin-right: 0px;
+        display: flex;
+        flex-direction: column;
     }
     #prodetails .single-pro-details {
         width: 100%;
     }
-
+    #MainImg {
+        min-height: 350px;
+        padding-bottom: 3px;
+    }
     /* Blog Page */
 
     #blog {

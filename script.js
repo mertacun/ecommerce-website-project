@@ -180,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cartTableBody) {
       cartTableBody.addEventListener('click', removeItem);
       displayCart();
+      updateCartBadge(); 
   }
 });
 
@@ -274,4 +275,9 @@ function updateCartBadge() {
   setTimeout(() => {
       cartBadge.style.opacity = '1';
   }, 350);
+
+  const mobileBadge = document.querySelector('.mobile-badge');
+  if (mobileBadge) {
+      mobileBadge.textContent = totalCount.toString();
+  }
 }
