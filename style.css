@@ -40,7 +40,7 @@ h6 {
 
 p {
     font-size: 16px;
-    color: #465b52;
+    color: #151515;
     margin: 15px 0 20px 0;
 }
 
@@ -248,16 +248,48 @@ button.white {
 /* Home Page */
 
 #hero {
-    background-image: url("img/120032.png");
-    height: 90vh;
+    height: 86vh;
     width: 100%;
-    background-position: top 25% right 0;
-    background-size: cover;
     padding: 0 80px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    position: relative;
+}
+
+.slides {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.slides > div {
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.slides > div > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding-left: 80px;
+}
+
+.slide1 {
+    background-image: url("img/120032.png");
+}
+
+.slide2 {
+    background-image: url("img/hero-fitness.jpg");
+}
+
+.slide3 {
+    background-image: url("img/hero-home.jpg");
 }
 
 #hero h4 {
@@ -275,8 +307,9 @@ button.white {
     padding: 14px 80px 14px 65px;
     background-repeat: no-repeat;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
+    width: fit-content;
 }
 
 #feature {
@@ -544,6 +577,8 @@ button.white {
     padding: 20px;
     margin-bottom: 20px;
     opacity: 0.3;
+    cursor: pointer;
+
 }
 #banner3 .banner-box:hover {
     opacity: 1;
@@ -738,13 +773,13 @@ footer .copyright {
 #prodetails .single-pro-image  {
     width: 40%;
     margin-right: 50px;
-    height: 450px; /* Adjust this value as needed */
+    height: 450px;
 }
 
 #MainImg {
     width: 100%;
-    height: 100%; /* Fill the container's height */
-    object-fit: cover; /* Maintain aspect ratio and fit within container */
+    height: 100%;
+    object-fit: cover;
 }
 
 .small-img-group {
@@ -755,7 +790,7 @@ footer .copyright {
 .small-img-col {
     flex-basis: 24%;
     cursor: pointer;
-    height: 100px; /* Adjust this value as needed */
+    height: 100px;
     overflow: hidden;
 }
 
@@ -1181,23 +1216,6 @@ div:where(.swal2-container) button:where(.swal2-styled) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Media Query */
 
 @media (max-width:799px) {
@@ -1267,11 +1285,22 @@ div:where(.swal2-container) button:where(.swal2-styled) {
         width: 50%;
         left: 60%;
     }
-
+    #icons {
+        padding: 15px;
+    }
     #hero {
         height: 70vh;
         padding: 0 80px;
         background-position: top 30% right 30%;
+    }
+
+    .slides > div {
+        height: 70vh;
+        background-position: top 30% right 35%;
+    }
+
+    .slides > div > div {
+        padding-left: 20px;
     }
     #fature {
         justify-content: center;
@@ -1320,10 +1349,10 @@ div:where(.swal2-container) button:where(.swal2-styled) {
         padding: 10px;
     }
     h1 {
-        font-size: 38px;
+        font-size: 35px;
     }
     h2 {
-        font-size: 32px;
+        font-size: 30px;
     }
     .wrap {
         width: 50%;
@@ -1386,6 +1415,9 @@ div:where(.swal2-container) button:where(.swal2-styled) {
     }
 
     /* Product Page */
+    #page-header {
+        height: 30vh;
+    }
 
     #prodetails {
         display: flex;

@@ -93,6 +93,20 @@ function displaySearchResults(results) {
 }
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    var slider = tns({
+        container: '.slides',
+        items: 1,
+        slideBy: 'page',
+        autoplay: true,
+        controls: false,
+        nav: false,
+        autoplayButtonOutput: false,
+    });
+});
+
+
+
 // Single Product Page
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -224,7 +238,7 @@ function displayCart() {
           <td><a href="#" class="remove-item"><i class="fa-solid fa-xmark"></i></a></td>
           <td><img src="${product.thumbnail}" alt="product"></td>
           <td>${product.name}</td>
-          <td>${product.price}</td>
+          <td>$${product.price.toFixed(2)}</td>
           <td><input type="number" value="${product.quantity}" min="1" class="quantity-input"></td>
           <td>$${productSubtotal.toFixed(2)}</td>
       `;
