@@ -33,7 +33,7 @@ cd paula-s-ecommerce-website
 
 Developed by Mert Acun<br>
 Product data provided by dummyjson.com<br>
-Hero section slider powered by Tiny Slider.js<br>  
+Hero section slider powered by Tiny Slider.js<br>
 Inspired from tech2etc
 
 #### License
