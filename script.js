@@ -17,6 +17,8 @@ if (close) {
 
 // Search Bar
 
+let sortedProducts = [];
+
 const allowedCategories = [
   "tops",
   "womens-dresses",
@@ -37,6 +39,97 @@ const fetchPromises = allowedCategories.map(category => {
           allProducts = allProducts.concat(products);
       });
 });
+
+Promise.all(fetchPromises)
+    .then(() => {
+        sortedProducts = allProducts.slice();
+        displayFeaturedProducts();
+        displayNewArrivals();
+    })
+    .catch(error => console.error('Error fetching products:', error));
+
+function displayProducts(products, containerId) {
+    const productContainer = document.getElementById(containerId);
+    productContainer.innerHTML = '';
+
+    const proContainer = document.createElement('div');
+    proContainer.classList.add('pro-container');
+
+    productContainer.appendChild(proContainer);
+
+    products.forEach(product => {
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('pro');
+
+        const productLink = document.createElement('a');
+        productLink.href = `sproduct.html?id=${product.id}`;
+
+        const productImg = document.createElement('img');
+        productImg.src = product.thumbnail;
+        productImg.alt = '';
+
+        const productDes = document.createElement('div');
+        productDes.classList.add('des');
+
+        const productBrand = document.createElement('span');
+        productBrand.textContent = product.brand;
+
+        const productTitle = document.createElement('h5');
+        productTitle.textContent = product.title;
+
+        const starDiv = document.createElement('div');
+        starDiv.classList.add('star');
+        for (let i = 0; i < 5; i++) {
+            const starIcon = document.createElement('i');
+            starIcon.classList.add('fas', 'fa-star');
+            starDiv.appendChild(starIcon);
+        }
+
+        const productPrice = document.createElement('h4');
+        productPrice.textContent = `$${product.price}`;
+
+        const cartLink = document.createElement('a');
+        cartLink.href = '#';
+        const cartIcon = document.createElement('i');
+        cartIcon.classList.add('fa-solid', 'fa-cart-plus', 'cart');
+
+        productDes.appendChild(productBrand);
+        productDes.appendChild(productTitle);
+        productDes.appendChild(starDiv);
+        productDes.appendChild(productPrice);
+
+        cartLink.appendChild(cartIcon);
+
+        productLink.appendChild(productImg);
+        productLink.appendChild(productDes);
+        productLink.appendChild(cartLink);
+
+        productDiv.appendChild(productLink);
+
+        proContainer.appendChild(productDiv);
+    });
+}
+
+function displayFeaturedProducts() {
+  const url = window.location.pathname;
+  const filename = url.substring(url.lastIndexOf('/') + 1);
+  let featuredProducts;
+
+  if (filename === 'index.html') {
+      featuredProducts = sortedProducts.slice(0, 8);
+  } else if (filename === 'sproduct.html') {
+      featuredProducts = sortedProducts.slice(0, 4);
+  } else {
+      featuredProducts = sortedProducts.slice(0, 8);
+  }
+
+  displayProducts(featuredProducts, 'product1-featured');
+}
+
+function displayNewArrivals() {
+    const newArrivals = sortedProducts.slice(8, 16);
+    displayProducts(newArrivals, 'product1-new-arrivals');
+}
 
 const searchTermInput = document.querySelector('.searchTerm');
 searchTermInput.addEventListener('input', () => {

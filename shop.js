@@ -1,6 +1,5 @@
 const pageSize = 20;
 let currentPage = 1;
-let sortedProducts = [];
 
 function fetchProductsForPage(pageNumber) {
     const startIndex = (pageNumber - 1) * pageSize;
