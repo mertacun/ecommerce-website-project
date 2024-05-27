@@ -16,7 +16,6 @@ if (close) {
 }
 
 // Search Bar
-
 let sortedProducts = [];
 
 const allowedCategories = [
@@ -135,9 +134,15 @@ const searchTermInput = document.querySelector('.searchTerm');
 searchTermInput.addEventListener('input', () => {
     const searchTerm = searchTermInput.value.trim().toLowerCase();
     
+    if (searchTerm === '') {
+        clearSearchResults();
+        return;
+    }
+
     const filteredProducts = allProducts.filter(product => {
-        return product.title.toLowerCase().includes(searchTerm) ||
-               product.brand.toLowerCase().includes(searchTerm);
+        const title = product.title ? product.title.toLowerCase() : '';
+        const brand = product.brand ? product.brand.toLowerCase() : '';
+        return title.includes(searchTerm) || brand.includes(searchTerm);
     });
     
     displaySearchResults(filteredProducts);
@@ -146,7 +151,7 @@ searchTermInput.addEventListener('input', () => {
 document.body.addEventListener('click', (event) => {
     const dropdownContainer = document.querySelector('.searchDropdown');
     if (!event.target.closest('.search')) {
-        dropdownContainer.style.display = 'none';
+        dropdownContainer.classList.remove('open');
     }
 });
 
@@ -156,7 +161,7 @@ function displaySearchResults(results) {
 
     if (results.length === 0) {
         dropdownContainer.innerHTML = '<p>No results found</p>';
-        dropdownContainer.style.display = 'block';
+        dropdownContainer.classList.add('open');
         return;
     }
 
@@ -182,9 +187,14 @@ function displaySearchResults(results) {
         dropdownContainer.appendChild(resultItem);
     });
 
-    dropdownContainer.style.display = 'block';
+    dropdownContainer.classList.add('open');
 }
 
+function clearSearchResults() {
+    const dropdownContainer = document.querySelector('.searchDropdown');
+    dropdownContainer.innerHTML = '';
+    dropdownContainer.classList.remove('open');
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     var slider = tns({
@@ -197,7 +207,6 @@ document.addEventListener('DOMContentLoaded', function () {
         autoplayButtonOutput: false,
     });
 });
-
 
 
 // Single Product Page
@@ -247,6 +256,7 @@ function addToCart() {
       if (existingProductIndex !== -1) {
           cart[existingProductIndex].quantity += selectedQuantity;
           localStorage.setItem('cart', JSON.stringify(cart));
+          updateCartBadge();
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -265,6 +275,7 @@ function addToCart() {
   cart.push(product);
 
   localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartBadge();
 
   Swal.fire({
     position: "top-end",
