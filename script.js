@@ -95,9 +95,8 @@ function displayProducts(products, containerId) {
 
         cartLink.appendChild(cartIcon);
 
-        // Add event listener to trigger SweetAlert popup
         cartLink.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent the default action of the anchor tag
+            event.preventDefault();
   Swal.fire({
                 title: 'Select size and enter quantity',
                 html: `
@@ -128,7 +127,6 @@ function displayProducts(products, containerId) {
             }).then((result) => {
                 if (result.isConfirmed) {
                     const { size, quantity } = result.value;
-                    // Handle adding the product with the specified size and quantity to the cart
                     addToCart(product, size, quantity);
                 }
             });
