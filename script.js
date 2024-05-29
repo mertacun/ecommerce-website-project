@@ -3,6 +3,7 @@ const close = document.getElementById('close');
 const nav = document.getElementById('navbar');
 let allProducts = [];
 
+
 if (bar) {
   bar.addEventListener('click', () => {
     nav.classList.add('active');
@@ -92,12 +93,51 @@ function displayProducts(products, containerId) {
         const cartIcon = document.createElement('i');
         cartIcon.classList.add('fa-solid', 'fa-cart-plus', 'cart');
 
+        cartLink.appendChild(cartIcon);
+
+        // Add event listener to trigger SweetAlert popup
+        cartLink.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent the default action of the anchor tag
+  Swal.fire({
+                title: 'Select size and enter quantity',
+                html: `
+                    <select id="swal-input-size" class="swal2-input">
+                        <option value="">Select Size</option>
+                        <option value="Small">Small</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Large">Large</option>
+                        <option value="X-Large">X-Large</option>
+                    </select>
+                    <input id="swal-input-quantity" type="number" class="swal2-input" min="1" value="1" placeholder="Quantity">
+                `,
+                preConfirm: () => {
+                    const size = document.getElementById('swal-input-size').value;
+                    const quantity = document.getElementById('swal-input-quantity').value;
+                    if (!size) {
+                        Swal.showValidationMessage('Please select a size');
+                        return false;
+                    }
+                    if (!quantity || quantity < 1) {
+                        Swal.showValidationMessage('Please enter a valid quantity');
+                        return false;
+                    }
+                    return { size, quantity: parseInt(quantity) };
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Add to Cart'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const { size, quantity } = result.value;
+                    // Handle adding the product with the specified size and quantity to the cart
+                    addToCart(product, size, quantity);
+                }
+            });
+        });
+
         productDes.appendChild(productBrand);
         productDes.appendChild(productTitle);
         productDes.appendChild(starDiv);
         productDes.appendChild(productPrice);
-
-        cartLink.appendChild(cartIcon);
 
         productLink.appendChild(productImg);
         productLink.appendChild(productDes);
@@ -325,7 +365,7 @@ function displayCart() {
   if (!cart) {
       cartTableBody.innerHTML = '<tr><td colspan="6">Your cart is empty</td></tr>';
       subtotalElement.querySelector('td:nth-child(2)').textContent = '$0.00';
-      subtotalElement.querySelector('strong').textContent = '$0.00';
+      subtotalElement.querySelector('strong').textContent = 'Total';
       return;
   }
 

@@ -14,9 +14,19 @@ function fetchProductDetails(productId) {
         });
 }
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
-        function displayProductDetails(product) {
+function formatCategoryName(category) {
+    return category.split('-').map(capitalizeFirstLetter).join(' ');
+}
+
+function displayProductDetails(product) {
     const productDetailsContainer = document.getElementById('prodetails');
+    const brand = product.brand ? product.brand : 'Others';
+    const formattedCategory = formatCategoryName(product.category);
+
     productDetailsContainer.innerHTML = `
         <div class="single-pro-image">
             <img src="${product.thumbnail}" width="100%" id="MainImg" alt="${product.title}">
@@ -32,7 +42,7 @@ function fetchProductDetails(productId) {
             </div>
         </div>
         <div class="single-pro-details">
-            <h6>${product.category} / ${product.brand}</h6>
+            <h6>${formattedCategory} / ${brand}</h6>
             <h4>${product.title}</h4>
             <h2>$${product.price.toFixed(2)}</h2>
             <select id="size-select">
@@ -76,3 +86,5 @@ function fetchProductDetails(productId) {
         const productId = urlParams.get('id');
 
         fetchProductDetails(productId);
+
+        
